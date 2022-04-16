@@ -9,11 +9,11 @@
     background-color: $dark-green-color;
     color: $white;
   }
-  &--secondary {
+  &--disabled {
     background-color: $light-gray-color;
     color: $white;
   }
-  &--tertiary {
+  &--secondary {
     background-color: transparent;
   }
 }

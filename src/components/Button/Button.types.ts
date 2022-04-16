@@ -5,6 +5,6 @@ export type Props = {
   onClick?: () => void;
 }
 
-export type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
+export type ButtonVariant = 'primary' | 'disabled' | 'secondary';
 
 export type ButtonIcon = 'chevron-right';

@@ -10,7 +10,7 @@ const Steps: FC<Props> = ({ steps, currentStep }) => (
         <div className={`step ${currentStep === stepNumber ? 'step--active' : ''}`} >
           {stepNumber}
         </div>
-        {index !== steps.length - 1 && <div className="separator"/>}
+        {index !== steps.length - 1 && <div className="step-separator"/>}
       </>
     ))}
   </div>
