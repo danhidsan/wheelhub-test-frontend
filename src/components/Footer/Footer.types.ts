@@ -1,4 +1,5 @@
 export type Props = {
-  onClickNext: () => void;
-  onClickBack: () => void;
+  isLastStep?: boolean;
+  onClickSecondButton: () => void;
+  onClickFirstButton: () => void;
 };

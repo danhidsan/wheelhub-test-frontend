@@ -16,6 +16,7 @@ export type StepContextType = {
   steps: Step[];
   nextStep: () => void;
   back: () => void;
+  reset: () => void;
 };
 
 const StepContext = createContext<StepContextType | undefined>(undefined);
@@ -37,9 +38,15 @@ export const StepContextProvider: FC<StepProviderProps> = ({ defaultStep, defaul
   const back = useCallback(() => {
     setCurrentStep((prev) => prev - 1);
   }, []);
+
+  const reset = useCallback(() => {
+    setCurrentStep(defaultStep);
+    const stepsCopy = steps.map((step) => ({...step, finished: false}));
+    setSteps(stepsCopy);
+  }, [defaultStep, steps]);
   
   return (
-    <StepContext.Provider value={{ currentStep, steps: defaultSteps, nextStep, back }}>
+    <StepContext.Provider value={{ currentStep, steps, nextStep, back, reset }}>
       {children}
     </StepContext.Provider>
   );

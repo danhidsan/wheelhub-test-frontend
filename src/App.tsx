@@ -1,9 +1,7 @@
 import React, { FC } from 'react';
 
 import Header from './components/Header';
-import Footer from './components/Footer';
 import Content from './components/Content';
-import Separator from './components/Separator';
 import { StepContextProvider, Step } from './context/StepContext';
 
 import './App.scss';
