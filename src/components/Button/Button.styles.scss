@@ -1,0 +1,19 @@
+@import '../../styles/base.scss';
+
+.button {
+  font-size: 16px;
+  border: none;
+  padding: 8px;
+  font-weight: 500;
+  &--primary {
+    background-color: $dark-green-color;
+    color: $white;
+  }
+  &--secondary {
+    background-color: $light-gray-color;
+    color: $white;
+  }
+  &--tertiary {
+    background-color: transparent;
+  }
+}
