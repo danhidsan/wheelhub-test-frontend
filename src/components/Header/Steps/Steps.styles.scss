@@ -22,6 +22,10 @@
       background-color: $dark-green-color;
       font-size: 20px;
     }
+
+    &--finished {
+      background-color: $dark-green-color;
+    }
   }
 
   .step-separator {

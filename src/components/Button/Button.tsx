@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { Chevron } from 'src/assets/Icons';
+import Chevron from 'src/assets/Icons/Chevron';
 
 import { Props } from './Button.types';
 import './Button.styles.scss';

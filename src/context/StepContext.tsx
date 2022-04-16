@@ -1,4 +1,4 @@
-import React, { createContext, FC, ReactNode, useState, useContext } from 'react';
+import React, { createContext, FC, ReactNode, useState, useContext, useCallback } from 'react';
 
 export type Step = {
   stepNumber: number;
@@ -14,6 +14,8 @@ export type StepProviderProps = {
 export type StepContextType = {
   currentStep: number;
   steps: Step[];
+  nextStep: () => void;
+  back: () => void;
 };
 
 const StepContext = createContext<StepContextType | undefined>(undefined);
@@ -21,8 +23,23 @@ const StepContext = createContext<StepContextType | undefined>(undefined);
 export const StepContextProvider: FC<StepProviderProps> = ({ defaultStep, defaultSteps, children }) => {
   const [currentStep, setCurrentStep] = useState(defaultStep);
   const [steps, setSteps] = useState(defaultSteps);
+  
+  const nextStep = useCallback(() => {
+    const stepToUpdateIndex = steps.findIndex((step) => step.stepNumber === currentStep);
+    
+    const stepsCopy = steps;
+    stepsCopy[stepToUpdateIndex].finished = true;
+    
+    setSteps(stepsCopy);
+    setCurrentStep(currentStep + 1);
+  }, [currentStep, steps]);
+
+  const back = useCallback(() => {
+    setCurrentStep((prev) => prev - 1);
+  }, []);
+  
   return (
-    <StepContext.Provider value={{ currentStep, steps: defaultSteps }}>
+    <StepContext.Provider value={{ currentStep, steps: defaultSteps, nextStep, back }}>
       {children}
     </StepContext.Provider>
   );

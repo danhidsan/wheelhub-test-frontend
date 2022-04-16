@@ -21,8 +21,6 @@ const App: FC = () => (
       <div className="app-content">
         <Header />
         <Content />
-        <Separator />
-        <Footer />
       </div>
     </div>
   </StepContextProvider>
