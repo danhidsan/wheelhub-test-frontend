@@ -16,6 +16,7 @@ const TextInput: FC<Props> = ({
   strength,
   label,
   tooltipText,
+  error,
   onChange 
 }) => {
   const [showPassword, setShowPassword] = useState(!isPassword);
@@ -25,6 +26,11 @@ const TextInput: FC<Props> = ({
   const mainClassNames = classNames('text-input-container', {
     [`${className}`]: !!className
   }); 
+
+  const inputClass = classNames({
+    'password-input': isPassword,
+    'input-error': !!error,
+  });
 
   return (
     <div className={mainClassNames}>
@@ -41,15 +47,15 @@ const TextInput: FC<Props> = ({
           <input
             name={name}
             value={value}
-            placeholder={placeholder} 
-            type={showPassword ? 'text' : 'password'} 
-            className={isPassword ? 'password-input' : ''}
+            placeholder={placeholder}
+            type={showPassword ? 'text' : 'password'}
+            className={inputClass}
             onChange={onChange}
           />
           {isPassword && (
-            <PasswordEye 
-              size={16} 
-              variant={showPassword ? 'hide' : 'show'} 
+            <PasswordEye
+              size={16}
+              variant={showPassword ? 'hide' : 'show'}
               className="eye"
               onClick={handleShowPassword}
             />
@@ -58,6 +64,7 @@ const TextInput: FC<Props> = ({
         {strength && isPassword && (
           <div className={`password-strength password-strength--${strength}`} />
         )}
+        {error && <span className="error">{error}</span>}
       </div>
     </div>
   );

@@ -21,7 +21,8 @@ const Form = () => {
           name="verify-password"
           label="Repite tu Contraseña"
           placeholder="Repite tu contraseña" 
-          className="password-input" 
+          className="password-input"
+          error="Esto es un error"
           isPassword 
         />
       </div>

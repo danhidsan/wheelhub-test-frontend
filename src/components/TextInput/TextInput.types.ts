@@ -9,5 +9,6 @@ export type Props = {
   className?: string;
   label?: string;
   tooltipText?: string;
+  error?: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 };
