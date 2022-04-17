@@ -9,7 +9,7 @@ import './App.scss';
 const initialStep = { stepNumber: 1, finished: false, valid: false };
 const initialSteps: Step[] = [
   { stepNumber: 1, finished: false, valid: false },
-  { stepNumber: 2, finished: false, valid: false },
+  { stepNumber: 2, finished: false, valid: true },
   { stepNumber: 3, finished: false, valid: false }
 ];
 

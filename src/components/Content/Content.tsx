@@ -40,7 +40,7 @@ const Content = () => {
           onClickFirstButton={handleClickFirstButton} 
           isLastStep={isLastStep}
           isFirstStep={currentStep.stepNumber === 1}
-          isStepValid={currentStep.valid} 
+          isStepValid={currentStep.valid || isLastStep} 
         />
       </div>
     </div>

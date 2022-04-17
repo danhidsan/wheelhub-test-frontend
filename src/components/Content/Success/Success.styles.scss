@@ -1,0 +1,18 @@
+.success-container {
+  display: flex;
+  justify-content: center;
+  column-gap: 25px;
+
+  .success-img {
+    height: 150px;
+    border: none;
+  }
+
+  .success-title {
+    font-weight: 700;
+  }
+
+  .success-text {
+    text-align: justify;
+  }
+}
