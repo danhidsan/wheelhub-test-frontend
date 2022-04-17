@@ -10,6 +10,11 @@
       color: $red;
     }
 
+    .bottom {
+      display: flex;
+      justify-content: space-between;
+    }
+
     .info {
       height: 10px;
       width: 10px;

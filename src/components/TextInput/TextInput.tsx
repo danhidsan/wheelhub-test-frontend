@@ -17,6 +17,7 @@ const TextInput: FC<Props> = ({
   label,
   tooltipText,
   error,
+  limit,
   onChange 
 }) => {
   const [showPassword, setShowPassword] = useState(!isPassword);
@@ -64,7 +65,10 @@ const TextInput: FC<Props> = ({
         {strength && isPassword && (
           <div className={`password-strength password-strength--${strength}`} />
         )}
-        {error && <span className="error">{error}</span>}
+        <div className="bottom">
+          {error ? <span className="error">{error}</span> : <div />}
+          {limit && value && <span>{`${value?.length}/${limit}`}</span>}
+        </div>
       </div>
     </div>
   );

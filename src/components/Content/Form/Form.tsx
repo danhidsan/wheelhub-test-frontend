@@ -14,7 +14,7 @@ const Form = () => {
           label="Crea tu contraseña"
           placeholder="Crea tu contraseña"
           className="password-input"
-          strength="strong"
+          strength="medium"
           isPassword
         />
         <TextInput 
@@ -32,6 +32,7 @@ const Form = () => {
         placeholder="Introducir tu pista"
         label="Crea tu pista para recordar tu contraseña (opcional)"
         tooltipText="Puedes crear tu pista"
+        limit={60}
       />
     </div>
   );

@@ -10,5 +10,6 @@ export type Props = {
   label?: string;
   tooltipText?: string;
   error?: string;
+  limit?: number;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 };
