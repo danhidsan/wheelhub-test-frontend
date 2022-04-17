@@ -1,0 +1,75 @@
+@import '../../styles/base.scss';
+
+.text-input-container {
+  .text-input-content {
+    display: flex;
+    flex-direction: column;
+
+    .info {
+      height: 10px;
+      width: 10px;
+      background-color: $bright-blue-color;
+    }
+
+    .label-content {
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      margin-bottom: 5px;
+
+      .info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 15px;
+        width: 15px;
+        background-color: $bright-blue-color;
+        margin-left: 20px;
+        border-radius: 10px;
+      }
+    }
+
+    input {
+      padding: 8px;
+      appearance: none;
+      border: 1px solid $text-color;
+      border-radius: 2px;
+      width: 100%;
+    }
+
+    .password-eye {
+      flex: 1;
+    }
+
+    .password-input {
+      padding-right: 30px;
+    }
+
+    .password-strength {
+      height: 3px;
+      
+      margin-top: -5px;
+      margin-left: 3px;
+
+      &--strong {
+        width: 98%;
+        background-color: $dark-green-color;
+      }
+
+      &--medium {
+        width: 50%;
+        background-color: $bright-orange-color;
+      }
+
+      &--weak {
+        width: 20%;
+        background-color: $red;
+      }
+    }
+  }
+
+  .eye {
+    margin-left: -25px;
+    cursor: pointer;
+  }
+}
