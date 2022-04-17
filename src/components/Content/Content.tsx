@@ -12,7 +12,7 @@ import './Content.styles.scss';
 const Content = () => {
   const { currentStep, steps, nextStep, back, reset } = useSteps();
   const isLastStep = useMemo(
-    () => currentStep === steps[steps.length - 1].stepNumber, 
+    () => currentStep.stepNumber === steps[steps.length - 1].stepNumber, 
     [currentStep, steps]
   );
   
@@ -28,12 +28,21 @@ const Content = () => {
   return (
     <div className="content">
       <div className="main">
-        {currentStep === 1 && <Instructions />}
-        {currentStep === 2 && <Form />}
-        {currentStep === 3 && <Success />}
+        <div className="step-main">
+          {currentStep.stepNumber !== 3 && <div className="title">Test Frontend Wheel Hub</div>}
+          {currentStep.stepNumber === 1 && <Instructions />}
+          {currentStep.stepNumber === 2 && <Form />}
+          {currentStep.stepNumber === 3 && <Success />}
+        </div>
+        <Separator />
+        <Footer 
+          onClickSecondButton={handleClickSecondButton} 
+          onClickFirstButton={handleClickFirstButton} 
+          isLastStep={isLastStep}
+          isFirstStep={currentStep.stepNumber === 1}
+          isStepValid={currentStep.valid} 
+        />
       </div>
-      <Separator />
-      <Footer onClickSecondButton={handleClickSecondButton} onClickFirstButton={handleClickFirstButton} isLastStep={isLastStep} />
     </div>
   );
 };

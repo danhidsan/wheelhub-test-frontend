@@ -1,0 +1,26 @@
+.instructions {
+  padding-top: 40px;
+  
+  .img-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    
+    img {
+      border: none;
+      height: 140px;
+    }
+  }
+
+  .instructions-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .text {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  
+}

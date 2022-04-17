@@ -5,14 +5,23 @@ import Button from '../Button';
 import { Props } from './Footer.types';
 import './Footer.styles.scss';
 
-const Footer: FC<Props> = ({ isLastStep, onClickFirstButton, onClickSecondButton }) => (
+const Footer: FC<Props> = ({ 
+  isLastStep, 
+  isFirstStep, 
+  isStepValid, 
+  onClickFirstButton, 
+  onClickSecondButton 
+}) => (
   <div className="footer">
-    <Button label="Atrás" variant="secondary" onClick={onClickFirstButton} />
+    {!isFirstStep ? (
+      <Button label="Atrás" variant="secondary" onClick={onClickFirstButton} />
+    ) : <div />}
     <Button 
       label={isLastStep ? 'Volver al inicio' : 'Siguiente'} 
       variant={isLastStep ? 'secondary' : 'primary'} 
       icon={!isLastStep ? 'chevron-right' : undefined} 
-      onClick={onClickSecondButton} 
+      onClick={onClickSecondButton}
+      disabled={!isStepValid} 
     />
   </div>
 );

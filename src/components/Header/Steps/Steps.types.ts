@@ -1,6 +1,6 @@
 export type Props = {
   steps: Step[];
-  currentStep: number;
+  currentStepNumber: number;
 };
 
 export type Step = {

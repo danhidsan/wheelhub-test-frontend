@@ -6,10 +6,10 @@ import Steps from './Steps';
 import './Header.styles.scss';
 
 const Header: FC = () => {
-  const { steps, currentStep } = useSteps();
+  const { steps, currentStep: { stepNumber } } = useSteps();
   return (
     <div className="app-header">
-      <Steps steps={steps} currentStep={currentStep} />
+      <Steps steps={steps} currentStepNumber={stepNumber} />
     </div>
   );
 };
