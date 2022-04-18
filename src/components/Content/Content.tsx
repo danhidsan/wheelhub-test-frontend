@@ -1,4 +1,5 @@
 import React, { useMemo, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Separator from '../Separator';
 import Footer from '../Footer';
@@ -10,6 +11,8 @@ import Success from './Success';
 import './Content.styles.scss';
 
 const Content = () => {
+  const { t } = useTranslation();
+
   const { currentStep, steps, nextStep, back, reset } = useSteps();
   const isLastStep = useMemo(
     () => currentStep.stepNumber === steps[steps.length - 1].stepNumber, 
@@ -29,7 +32,9 @@ const Content = () => {
     <div className="content">
       <div className="main">
         <div className="step-main">
-          {currentStep.stepNumber !== 3 && <div className="title">Test Frontend Wheel Hub</div>}
+          {currentStep.stepNumber !== 3 && (
+            <div className="title">{t('stepTitle')}</div>
+          )}
           {currentStep.stepNumber === 1 && <Instructions />}
           {currentStep.stepNumber === 2 && <Form />}
           {currentStep.stepNumber === 3 && <Success />}

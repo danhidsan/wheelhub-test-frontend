@@ -1,10 +1,14 @@
 import React, { FC } from 'react';
 
-import Header from './components/Header';
-import Content from './components/Content';
 import { StepContextProvider, Step } from './context/StepContext';
+import { LanguageContextProvider, LaguageProviderProps } from './context/LanguageContext';
+import Wizard from './Wizard';
 
-import './App.scss';
+
+const browserLang = navigator.language.split('-')[0];
+const defaultLang = ['es', 'en'].includes(browserLang)
+  ? (browserLang as LaguageProviderProps['defaultLanguage'])
+  : 'es';
 
 const initialStep = { stepNumber: 1, finished: false, valid: false };
 const initialSteps: Step[] = [
@@ -14,14 +18,11 @@ const initialSteps: Step[] = [
 ];
 
 const App: FC = () => (
-  <StepContextProvider defaultStep={initialStep} defaultSteps={initialSteps}>
-    <div className="app">
-      <div className="app-content">
-        <Header />
-        <Content />
-      </div>
-    </div>
-  </StepContextProvider>
+  <LanguageContextProvider defaultLanguage={defaultLang}>
+    <StepContextProvider defaultStep={initialStep} defaultSteps={initialSteps}>
+      <Wizard />
+    </StepContextProvider>
+  </LanguageContextProvider>
 );
 
 export default App;
