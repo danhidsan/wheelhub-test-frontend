@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, Fragment } from 'react';
 import classNames from 'classnames';
 
 import Check from 'src/assets/Icons/Check';
@@ -15,12 +15,12 @@ const Steps: FC<Props> = ({ steps, currentStepNumber }) => {
           'step--finished': finished
         });
         return (
-          <>
+          <Fragment key={stepNumber}>
             <div className={stepClassNames} >
               {finished ? <Check /> : stepNumber}
             </div>
             {index !== steps.length - 1 && <div className="step-separator"/>}
-          </>
+          </Fragment>
         );
       })}
     </div>

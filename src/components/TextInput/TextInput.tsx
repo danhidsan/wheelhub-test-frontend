@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback } from 'react';
+import React, { useState, useCallback, forwardRef, LegacyRef } from 'react';
 import classNames from 'classnames';
 
 import PasswordEye from 'src/assets/Icons/PasswordEye';
@@ -7,7 +7,7 @@ import Info from 'src/assets/Icons/Info';
 import { Props } from './TextInput.types';
 import './TextInput.styles.scss';
 
-const TextInput: FC<Props> = ({ 
+const TextInput = forwardRef<HTMLInputElement, Props>(({ 
   name,
   value,
   isPassword,
@@ -19,7 +19,7 @@ const TextInput: FC<Props> = ({
   error,
   limit,
   onChange 
-}) => {
+}, ref) => {
   const [showPassword, setShowPassword] = useState(!isPassword);
 
   const handleShowPassword = useCallback(() => setShowPassword((prev) => !prev), []);
@@ -52,6 +52,7 @@ const TextInput: FC<Props> = ({
             type={showPassword ? 'text' : 'password'}
             className={inputClass}
             onChange={onChange}
+            ref={ref as LegacyRef<HTMLInputElement>}
           />
           {isPassword && (
             <PasswordEye
@@ -72,6 +73,8 @@ const TextInput: FC<Props> = ({
       </div>
     </div>
   );
-};
+});
+
+TextInput.displayName = 'TextInput';
 
 export default TextInput;

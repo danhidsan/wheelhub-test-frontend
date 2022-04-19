@@ -2,6 +2,6 @@ export type Props = {
   isFirstStep?: boolean;
   isLastStep?: boolean;
   isStepValid?: boolean;
-  onClickSecondButton: () => void;
+  onClickSecondButton?: () => void;
   onClickFirstButton: () => void;
 };
