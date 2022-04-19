@@ -1,6 +1,5 @@
 import React, { useMemo, useCallback, useRef } from 'react';
 
-import Separator from '../Separator';
 import Footer from '../Footer';
 import { useSteps } from 'src/context/StepContext'; 
 
@@ -23,16 +22,6 @@ const Content = () => {
     () => currentStep.stepNumber === 1, 
     [currentStep]
   );
-  const formRef = useRef<HTMLFormElement>(null);
-  
-  const handleClickSecondButton = useCallback(() => {
-    if (isLastStep) reset();
-    else nextStep();
-  }, [isLastStep, nextStep, reset]);
-
-  const handleClickFirstButton = useCallback(() => {
-    back();
-  }, [back]);
 
   return (
     <div className="content">
@@ -43,14 +32,6 @@ const Content = () => {
           {isSecondStep && <Form />}
           {isLastStep && <Success />}
         </div>
-        <Separator />
-        <Footer 
-          onClickSecondButton={handleClickSecondButton} 
-          onClickFirstButton={handleClickFirstButton} 
-          isLastStep={isLastStep}
-          isFirstStep={isFirstStep}
-          isStepValid={currentStep.valid || isLastStep} 
-        />
       </div>
     </div>
   );

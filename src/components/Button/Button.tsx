@@ -7,6 +7,7 @@ import './Button.styles.scss';
 
 const Button: FC<Props> = ({ label, icon, variant, disabled, onClick }) => (
   <button
+    type="submit"
     className={`button button--${disabled ? 'disabled' : variant}`} 
     onClick={onClick}
     disabled={disabled}

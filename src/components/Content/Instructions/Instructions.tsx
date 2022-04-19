@@ -2,12 +2,13 @@ import React, { useCallback } from 'react';
 
 import greenLogo from 'src/assets/img/Logotipo-Vertical-Verde-Alta.png';
 import Checkbox from 'src/components/Checkbox';
+import Footer from 'src/components/Footer';
 import { useSteps } from 'src/context/StepContext';
 
 import './Instructions.styles.scss';
 
 const Instructions = () => {
-  const { validate, currentStep } = useSteps();
+  const {currentStep, validate, nextStep, back} = useSteps();
   
   const handleOnClickCheckbox = useCallback(
     () => {
@@ -15,6 +16,14 @@ const Instructions = () => {
     }, 
     [currentStep.valid, validate]
   );
+
+  const handleClickSecondButton = useCallback(() => {
+    nextStep();
+  }, [nextStep]);
+
+  const handleClickFirstButton = useCallback(() => {
+    back();
+  }, [back]);
   
   return (
     <div className="instructions">
@@ -39,6 +48,12 @@ const Instructions = () => {
         label={'Confirma que es mayor de edad, y acepta el tratamiento de sus datos según la política de protección de datos vigente'} 
         onClick={handleOnClickCheckbox}
         checked={currentStep.valid}
+      />
+      <Footer 
+        onClickSecondButton={handleClickSecondButton} 
+        onClickFirstButton={handleClickFirstButton}
+        isFirstStep
+        isStepValid={currentStep.valid || currentStep.stepNumber === 3} 
       />
     </div>
   );
