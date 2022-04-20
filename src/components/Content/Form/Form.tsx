@@ -1,4 +1,4 @@
-import React, { useCallback, FC } from 'react';
+import React, { useCallback, FC, useMemo } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { object, string, ref } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -12,9 +12,6 @@ import './Form.styles.scss';
 
 const strongRegex = /^(?=.*\d)(?=.*\W)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 const mediumRegex = /^((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))^/;
-const regexError = `
-  La contraseña debe contener al menos 8 caracteres, una letra minúscula, una letra mayúscula, un número, un caracter especial
-`;
 
 const validationSchema = object({
   user: string().required(),
@@ -24,13 +21,13 @@ const validationSchema = object({
   verifyPassword: string()
     .required('La confirmación de contraseña es un campo obligatorio')
     .oneOf([ref('password'), null], 'Las contraseñas deben coincidir'),
-  hint: string().notRequired().min(60, 'Debe tener al menos 60 caracteres'),
+  hint: string().min(60, 'Debe tener al menos 60 caracteres'),
 });
 
 const Form: FC = () => {
   const { currentStep, back } = useSteps();
 
-  const { register, handleSubmit, formState: { errors } } = useForm<FormInput>({
+  const { register, handleSubmit, formState: { errors }, watch } = useForm<FormInput>({
     resolver: yupResolver(validationSchema) 
   });
 
@@ -39,8 +36,15 @@ const Form: FC = () => {
   const handleClickFirstButton = useCallback(() => {
     back();
   }, [back]);
-  
 
+  const password = watch('password');
+
+  const passwordStrenght = useMemo(() => {
+    if (strongRegex.test(password)) return 'strong';
+    if (mediumRegex.test(password)) return 'medium';
+    if(!password) return undefined;
+    return 'weak';
+  }, [password]);
   return (
     <div className="form-content">
       <TextInput {...register('user')}
@@ -54,7 +58,7 @@ const Form: FC = () => {
           label="Crea tu contraseña"
           placeholder="Crea tu contraseña"
           className="password-input"
-          strength="medium"
+          strength={passwordStrenght}
           error={errors.password?.message}
           isPassword
         />
