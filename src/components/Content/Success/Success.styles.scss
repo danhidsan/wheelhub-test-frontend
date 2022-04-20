@@ -1,7 +1,9 @@
 .success-container {
-  display: flex;
-  justify-content: center;
-  column-gap: 25px;
+  .success-content {
+    display: flex;
+    justify-content: center;
+    column-gap: 25px;
+  }
 
   .success-img {
     height: 150px;

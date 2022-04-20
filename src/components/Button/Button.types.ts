@@ -3,6 +3,7 @@ export type Props = {
   variant: ButtonVariant;
   icon?: ButtonIcon;
   disabled?: boolean;
+  isLoading?: boolean;
   onClick?: () => void;
 }
 

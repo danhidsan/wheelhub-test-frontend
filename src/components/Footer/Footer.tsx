@@ -8,7 +8,8 @@ import './Footer.styles.scss';
 const Footer: FC<Props> = ({ 
   isLastStep, 
   isFirstStep, 
-  isStepValid, 
+  isStepValid,
+  isLoading,
   onClickFirstButton, 
   onClickSecondButton 
 }) => (
@@ -21,7 +22,8 @@ const Footer: FC<Props> = ({
       variant={isLastStep ? 'secondary' : 'primary'} 
       icon={!isLastStep ? 'chevron-right' : undefined} 
       onClick={onClickSecondButton}
-      disabled={!isStepValid} 
+      disabled={!isStepValid || isLoading}
+      isLoading={isLoading}
     />
   </div>
 );

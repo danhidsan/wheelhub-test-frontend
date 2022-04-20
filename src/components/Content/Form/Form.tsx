@@ -1,4 +1,4 @@
-import React, { useCallback, FC, useMemo } from 'react';
+import React, { useCallback, FC, useMemo, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { object, string, ref } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import Footer from 'src/components/Footer';
 import TextInput from 'src/components/TextInput';
 import { useSteps } from 'src/context/StepContext';
+import { createUser } from 'src/data/user';
 
 import { FormInput } from './Form.types';
 import './Form.styles.scss';
@@ -14,24 +15,39 @@ const strongRegex = /^(?=.*\d)(?=.*\W)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$
 const mediumRegex = /^((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))^/;
 
 const validationSchema = object({
-  user: string().required(),
+  user: string().required('El usuarios es obligatorio'),
   password: string()
     .required('La contraseña es un campo obligatorio'),
   // .matches(regex, regexError),
   verifyPassword: string()
     .required('La confirmación de contraseña es un campo obligatorio')
     .oneOf([ref('password'), null], 'Las contraseñas deben coincidir'),
-  hint: string().min(60, 'Debe tener al menos 60 caracteres'),
+  hint: string().notRequired().max(60, 'No es posible escribir mas de 6 caracteres'),
 });
 
 const Form: FC = () => {
-  const { currentStep, back } = useSteps();
+  const { currentStep, back, nextStep } = useSteps();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const { register, handleSubmit, formState: { errors }, watch } = useForm<FormInput>({
     resolver: yupResolver(validationSchema) 
   });
 
-  const handleSubmitForm =  useCallback<SubmitHandler<FormInput>>((data) => console.log(data), []);
+  const handleSubmitForm =  useCallback<SubmitHandler<FormInput>>(async (data) => {
+    const { user, password, hint } = data;
+    const userToCreate = {
+      user,
+      password,
+      hint: hint ? hint : undefined,
+    };
+
+    setIsLoading(true);
+    const response = await createUser(userToCreate);
+    console.log(response);
+    nextStep();
+    setIsLoading(false);
+  }, [nextStep]);
 
   const handleClickFirstButton = useCallback(() => {
     back();
@@ -79,12 +95,14 @@ const Form: FC = () => {
         tooltipText="Puedes crear tu pista"
         className="hint-input"
         error={errors.hint?.message}
+        value={watch('hint')}
         limit={60}
       />
       <Footer
         onClickSecondButton={handleSubmit(handleSubmitForm)}
         onClickFirstButton={handleClickFirstButton}
-        isStepValid={currentStep.valid || currentStep.stepNumber === 3} 
+        isStepValid={currentStep.valid || currentStep.stepNumber === 3}
+        isLoading={isLoading}
       />
     </div>
   );
