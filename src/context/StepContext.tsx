@@ -44,9 +44,10 @@ export const StepContextProvider: FC<StepProviderProps> = ({ defaultStep, defaul
 
   const reset = useCallback(() => {
     setCurrentStep(defaultStep);
-    const stepsCopy = steps.map((step) => ({...step, finished: false, valid: false}));
+    console.log(defaultSteps);
+    const stepsCopy = steps.map((step) => ({...step, finished: false }));
     setSteps(stepsCopy);
-  }, [defaultStep, steps]);
+  }, [defaultStep, defaultSteps, steps]);
 
   const validate = useCallback((valid: boolean) => {
     const stepToUpdateIndex = steps.findIndex((step) => step.stepNumber === currentStep.stepNumber);

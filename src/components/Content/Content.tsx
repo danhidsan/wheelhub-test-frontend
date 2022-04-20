@@ -1,6 +1,5 @@
-import React, { useMemo, useCallback, useRef } from 'react';
+import React, { useMemo } from 'react';
 
-import Footer from '../Footer';
 import { useSteps } from 'src/context/StepContext'; 
 
 import Instructions from './Instructions';
@@ -9,7 +8,7 @@ import Success from './Success';
 import './Content.styles.scss';
 
 const Content = () => {
-  const { currentStep, nextStep, back, reset } = useSteps();
+  const { currentStep } = useSteps();
   const isLastStep = useMemo(
     () => currentStep.stepNumber === 3, 
     [currentStep]

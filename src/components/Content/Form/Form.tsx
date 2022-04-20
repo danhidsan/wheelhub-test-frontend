@@ -101,7 +101,7 @@ const Form: FC = () => {
       <Footer
         onClickSecondButton={handleSubmit(handleSubmitForm)}
         onClickFirstButton={handleClickFirstButton}
-        isStepValid={currentStep.valid || currentStep.stepNumber === 3}
+        isStepValid
         isLoading={isLoading}
       />
     </div>

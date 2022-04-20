@@ -6,11 +6,11 @@ import { StepContextProvider, Step } from './context/StepContext';
 
 import './App.scss';
 
-const initialStep = { stepNumber: 1, finished: false, valid: false };
+const initialStep = { stepNumber: 1, finished: false };
 const initialSteps: Step[] = [
-  { stepNumber: 1, finished: false, valid: false },
-  { stepNumber: 2, finished: false, valid: true },
-  { stepNumber: 3, finished: false, valid: false }
+  { stepNumber: 1, finished: false },
+  { stepNumber: 2, finished: false },
+  { stepNumber: 3, finished: false }
 ];
 
 const App: FC = () => (
