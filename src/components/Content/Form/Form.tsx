@@ -26,7 +26,7 @@ const validationSchema = object({
 });
 
 const Form: FC = () => {
-  const { currentStep, back, nextStep } = useSteps();
+  const { back, nextStep } = useSteps();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -43,8 +43,11 @@ const Form: FC = () => {
     };
 
     setIsLoading(true);
+    
     const response = await createUser(userToCreate);
-    console.log(response);
+    
+    if (response.status !== 200) return setIsLoading(false);
+    
     nextStep();
     setIsLoading(false);
   }, [nextStep]);
